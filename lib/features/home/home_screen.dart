@@ -147,97 +147,40 @@ class HomeScreen extends StatelessWidget {
 
             const SizedBox(height: 28),
 
-            // ── Summary Cards ────────────────────────────────────────────
-            if (appState.addedApps.isNotEmpty)
-              SizedBox(
-                height: 155,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  clipBehavior: Clip.none,
-                  itemCount: appState.addedApps.length,
-                  separatorBuilder: (_, __) => const SizedBox(width: 12),
-                  itemBuilder: (context, i) {
-                    final app = appState.addedApps[i];
-                    return GestureDetector(
-                      onTap: () => context.push(app.route),
-                      child: Container(
-                        width: 130,
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: AppColors.bgCard,
-                          borderRadius: BorderRadius.circular(24),
-                          border: Border.all(color: AppColors.border),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.03),
-                              blurRadius: 8,
-                              offset: const Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // Black rounded icon
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                color: app.iconBgColor,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Icon(app.icon, color: app.iconColor, size: 20),
-                            ),
-                            const Spacer(),
-                            // Value
-                            Text(
-                              app.summaryValue ?? '-',
-                              style: const TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.w900,
-                                color: AppColors.black900,
-                                height: 1,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            // Title row with chevron
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    app.summaryTitle ?? app.name,
-                                    style: const TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppColors.black900,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                const Icon(Icons.chevron_right_rounded, size: 14, color: AppColors.black900),
-                              ],
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              app.summarySubtitle ?? '',
-                              style: const TextStyle(
-                                fontSize: 10,
-                                color: AppColors.textSecondary,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              )
-            else
-              const SizedBox.shrink(),
+            // ── Günün Özeti ────────────────────────────────────────────
+            SizedBox(
+              height: 150,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                clipBehavior: Clip.none,
+                children: [
+                  _SummaryCardNew(
+                    icon: Icons.people_outline_rounded,
+                    value: '4',
+                    title: 'Aktif Vardiya',
+                    subtitle: '4 kişi çalışıyor',
+                    onTap: () {},
+                  ),
+                  const SizedBox(width: 12),
+                  _SummaryCardNew(
+                    icon: Icons.account_balance_wallet_outlined,
+                    value: '2',
+                    title: 'Geciken Ödeme',
+                    subtitle: 'Toplam 8.750 TL',
+                    onTap: () {},
+                  ),
+                  const SizedBox(width: 12),
+                  _SummaryCardNew(
+                    icon: Icons.calendar_today_outlined,
+                    value: '7',
+                    title: 'Rezervasyon',
+                    subtitle: 'Bugünkü rezervasyon',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
 
             const SizedBox(height: 32),
 
@@ -858,3 +801,100 @@ class _SuggestedAppTile extends StatelessWidget {
     }
   }
 }
+
+// ── Günün Özeti Card New ──────────────────────────────────────────────────
+class _SummaryCardNew extends StatelessWidget {
+  final IconData icon;
+  final String value;
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+
+  const _SummaryCardNew({
+    super.key,
+    required this.icon,
+    required this.value,
+    required this.title,
+    required this.subtitle,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 140,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Siyah yuvarlak ikon
+            Container(
+              width: 36,
+              height: 36,
+              decoration: const BoxDecoration(
+                color: AppColors.black900,
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: Colors.white, size: 18),
+            ),
+            const Spacer(),
+            // Büyük numara
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.w900,
+                color: AppColors.black900,
+                height: 1,
+              ),
+            ),
+            const SizedBox(height: 6),
+            // Başlık ve ok
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.black900,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const Icon(Icons.chevron_right_rounded, size: 14, color: AppColors.black900),
+              ],
+            ),
+            const SizedBox(height: 4),
+            // Alt başlık
+            Text(
+              subtitle,
+              style: const TextStyle(
+                fontSize: 10,
+                color: AppColors.textSecondary,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+

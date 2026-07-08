@@ -163,6 +163,28 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<_NotifData> currentImportant = [];
+    List<_NotifData> currentToday = [];
+    List<_NotifData> currentYesterday = [];
+
+    if (_selectedFilter == 'Tümü') {
+      currentImportant = _important;
+      currentToday = _today;
+      currentYesterday = _yesterday;
+    } else if (_selectedFilter == 'Okunmamış') {
+      currentImportant = _important.take(2).toList();
+      currentToday = _today.take(2).toList();
+      currentYesterday = [];
+    } else if (_selectedFilter == 'Önemli') {
+      currentImportant = _important;
+      currentToday = [];
+      currentYesterday = [];
+    } else if (_selectedFilter == 'Arşiv') {
+      currentImportant = [];
+      currentToday = [];
+      currentYesterday = _yesterday;
+    }
+
     return Scaffold(
       backgroundColor: AppColors.bgPage,
       body: SafeArea(
@@ -248,94 +270,97 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             ),
 
             // ── Önemli Bildirimler ──────────────────────────────────────
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: const [
-                            Icon(Icons.star_outline_rounded, size: 15, color: AppColors.black900),
-                            SizedBox(width: 6),
-                            Text(
-                              'Önemli Bildirimler',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.black900,
+            if (currentImportant.isNotEmpty)
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: const [
+                              Icon(Icons.star_outline_rounded, size: 15, color: AppColors.black900),
+                              SizedBox(width: 6),
+                              Text(
+                                'Önemli Bildirimler',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.black900,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Text(
-                              'Tümünü Gör',
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.textSecondary,
+                            ],
+                          ),
+                          Row(
+                            children: const [
+                              Text(
+                                'Tümünü Gör',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.textSecondary,
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 2),
-                            Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.textSecondary),
-                          ],
-                        ),
-                      ],
+                              SizedBox(width: 2),
+                              Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.textSecondary),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  // Important notification list
-                  ...(_important.map((n) => _ImportantTile(notif: n))),
-                ],
+                    const SizedBox(height: 10),
+                    // Important notification list
+                    ...(currentImportant.map((n) => _ImportantTile(notif: n))),
+                  ],
+                ),
               ),
-            ),
 
             // ── Bugün ───────────────────────────────────────────────────
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    child: Text(
-                      'Bugün',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textSecondary,
+            if (currentToday.isNotEmpty)
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Text(
+                        'Bugün',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ),
-                  ),
-                  ...(_today.map((n) => _StandardTile(notif: n))),
-                ],
+                    ...(currentToday.map((n) => _StandardTile(notif: n))),
+                  ],
+                ),
               ),
-            ),
 
             // ── Dün ─────────────────────────────────────────────────────
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
-                    child: Text(
-                      'Dün',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textSecondary,
+            if (currentYesterday.isNotEmpty)
+              SliverToBoxAdapter(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+                      child: Text(
+                        'Dün',
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ),
-                  ),
-                  ...(_yesterday.map((n) => _StandardTile(notif: n))),
-                ],
+                    ...(currentYesterday.map((n) => _StandardTile(notif: n))),
+                  ],
+                ),
               ),
-            ),
 
             // ── Date footer ─────────────────────────────────────────────
             const SliverToBoxAdapter(

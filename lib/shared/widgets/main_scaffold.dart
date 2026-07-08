@@ -49,9 +49,13 @@ class MainScaffold extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-              Text(
+              const Text(
                 'Hızlı İşlemler',
-                style: Theme.of(context).textTheme.titleLarge,
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.black900,
+                ),
               ),
               const SizedBox(height: 24),
               Row(
@@ -97,10 +101,10 @@ class MainScaffold extends StatelessWidget {
                     color: AppColors.bgSurface,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(Icons.grid_view_rounded, color: AppColors.textPrimary),
+                  child: const Icon(Icons.grid_view_rounded, color: AppColors.black900),
                 ),
-                title: const Text('Yeni Uygulama Ekle', style: TextStyle(fontWeight: FontWeight.w600)),
-                subtitle: const Text('İşletmeniz için yeni araçlar keşfedin', style: TextStyle(fontSize: 12)),
+                title: const Text('Yeni Uygulama Ekle', style: TextStyle(fontWeight: FontWeight.w600, color: AppColors.black900)),
+                subtitle: const Text('İşletmeniz için yeni araçlar keşfedin', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
                 trailing: const Icon(Icons.chevron_right_rounded, color: AppColors.textSecondary),
                 onTap: () {
                   Navigator.pop(context);
@@ -263,7 +267,7 @@ class _QuickActionItem extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textPrimary,
+                  color: AppColors.black900,
                 ),
               ),
             ],

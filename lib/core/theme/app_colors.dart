@@ -75,15 +75,37 @@ class AppColors {
   static const Color categoryOperasyon = Color(0xFFD97706); 
   static const Color categoryRaporlama = Color(0xFFDB2777); 
 
-  // ── Dark Mode Colors (from elephor.com.tr) ─────────────────────────
-  static const Color bgPageDark    = Color(0xFF07080A);
-  static const Color bgCardDark    = Color(0xFF0F141B);
-  static const Color bgSurfaceDark = Color(0xFF151A21);
+  // ── Dark Mode Colors ─────────────────────────
+  static const Color bgPageDark    = Color(0xFF0F1115); // Ana arka plan
+  static const Color bgSurfaceDark = Color(0xFF171A21); // İkinci seviye arka plan
+  static const Color bgCardDark    = Color(0xFF1E222B); // Kart arka planı
+  static const Color hoverDark     = Color(0xFF262B36); // Hover / seçili kart
   
-  static const Color textPrimaryDark   = Color(0xFFFFFFFF);
-  static const Color textSecondaryDark = Color(0xFFC9CDD3);
-  static const Color textHintDark      = Color(0xFF7D8189);
+  static const Color textPrimaryDark   = Color(0xFFFFFFFF); // Ana başlıklar
+  static const Color textSecondaryDark = Color(0xFFE5E7EB); // Normal metin
+  static const Color textHintDark      = Color(0xFFA8B0BD); // Açıklama metni
+  static const Color textDisabledDark  = Color(0xFF6B7280); // Pasif metin
   
-  static const Color borderDark      = Color(0x1FFFFFFF);
-  static const Color borderLightDark = Color(0x0FFFFFFF);
+  static const Color borderCardDark    = Color(0xFF2D3440); // Kart kenarlıkları
+  static const Color borderInputDark   = Color(0xFF3A414D); // Input kenarlıkları
+  static const Color dividerDark       = Color(0xFF444C5A); // Ayırıcı çizgiler
+
+  static const Color buttonPrimaryBgDark = Color(0xFFFFFFFF);
+  static const Color buttonPrimaryTextDark = Color(0xFF111111);
+  static const Color buttonSecondaryBgDark = Color(0xFF262B36);
+  static const Color buttonSecondaryTextDark = Color(0xFFFFFFFF);
+
+  static const Color successDark = Color(0xFF22C55E);
+  static const Color warningDark = Color(0xFFF59E0B);
+  static const Color errorDark   = Color(0xFFEF4444);
+  static const Color infoDark    = Color(0xFF3B82F6);
+
+  static const Color premiumGoldDark = Color(0xFFD4AF37);
+  static const Color premiumCardDark = Color(0xFF18181B);
+  
+  static const LinearGradient premiumGradientDark = LinearGradient(
+    colors: [Color(0xFFD4AF37), Color(0xFFF4D35E)],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }
