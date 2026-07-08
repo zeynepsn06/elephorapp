@@ -57,7 +57,7 @@ class _AppsScreenState extends State<AppsScreen> {
         .toList();
 
     return Scaffold(
-      backgroundColor: AppColors.bgPage,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
           // ── Header ───────────────────────────────────────────────────
@@ -74,18 +74,18 @@ class _AppsScreenState extends State<AppsScreen> {
                         children: [
                           Text(
                             'Uygulamalar',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.w900,
-                              color: AppColors.black900,
+                              color: context.textPrimary,
                               letterSpacing: -0.5,
                             ),
                           ),
                           Text(
                             'İşletmen için ihtiyacın olan tüm araçlar.',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 13,
-                              color: AppColors.textSecondary,
+                              color: context.textSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -99,19 +99,19 @@ class _AppsScreenState extends State<AppsScreen> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
                         decoration: BoxDecoration(
-                          color: AppColors.gray100,
+                          color: context.gray100,
                           borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: AppColors.border),
+                          border: Border.all(color: context.border),
                         ),
                         child: Row(
-                          children: const [
-                            Icon(Icons.search_rounded, size: 16, color: AppColors.textHint),
-                            SizedBox(width: 6),
+                          children: [
+                            Icon(Icons.search_rounded, size: 16, color: context.textHint),
+                            const SizedBox(width: 6),
                             Text(
                               'Uygulama ara...',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.textHint,
+                                color: context.textHint,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -150,10 +150,10 @@ class _AppsScreenState extends State<AppsScreen> {
                           duration: const Duration(milliseconds: 180),
                           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 0),
                           decoration: BoxDecoration(
-                            color: isSelected ? AppColors.black900 : Colors.transparent,
+                            color: isSelected ? context.textPrimary : Colors.transparent,
                             borderRadius: BorderRadius.circular(24),
                             border: Border.all(
-                              color: isSelected ? AppColors.black900 : AppColors.border,
+                              color: isSelected ? context.textPrimary : context.border,
                             ),
                           ),
                           child: Row(
@@ -161,16 +161,16 @@ class _AppsScreenState extends State<AppsScreen> {
                             children: [
                               Icon(
                                 cat.icon,
-                                size: 13,
-                                color: isSelected ? Colors.white : AppColors.textSecondary,
+                                size: 14,
+                                color: isSelected ? context.bgPage : context.textHint,
                               ),
-                              const SizedBox(width: 5),
+                              const SizedBox(width: 6),
                               Text(
                                 cat.label,
                                 style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color: isSelected ? Colors.white : AppColors.textSecondary,
+                                  fontSize: 12,
+                                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w600,
+                                  color: isSelected ? context.bgPage : context.textHint,
                                 ),
                               ),
                             ],

@@ -6,6 +6,15 @@ import '../../features/apps/apps_screen.dart';
 import '../../features/apps/app_detail_screen.dart';
 import '../../features/profile/profile_screen.dart';
 import '../../features/profile/placeholder_screen.dart';
+import '../../features/profile/account_info_screen.dart';
+import '../../features/profile/notification_settings_screen.dart';
+import '../../features/profile/security_settings_screen.dart';
+import '../../features/profile/help_center_screen.dart';
+import '../../features/profile/contact_us_screen.dart';
+import '../../features/profile/privacy_policy_screen.dart';
+import '../../features/profile/terms_of_use_screen.dart';
+import '../../features/profile/about_app_screen.dart';
+import '../../features/profile/business_settings_screen.dart';
 import '../../features/notifications/notifications_screen.dart';
 import '../../features/team/team_screen.dart';
 import '../../features/team/permissions_screen.dart';
@@ -123,6 +132,51 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => PlaceholderScreen(
         title: state.pathParameters['title']!,
       ),
+    ),
+    GoRoute(
+      path: '/account-info',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const AccountInfoScreen(),
+    ),
+    GoRoute(
+      path: '/business-settings',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const BusinessSettingsScreen(),
+    ),
+    GoRoute(
+      path: '/notification-settings',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const NotificationSettingsScreen(),
+    ),
+    GoRoute(
+      path: '/security-settings',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const SecuritySettingsScreen(),
+    ),
+    GoRoute(
+      path: '/help-center',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const HelpCenterScreen(),
+    ),
+    GoRoute(
+      path: '/contact-us',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const ContactUsScreen(),
+    ),
+    GoRoute(
+      path: '/privacy-policy',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const PrivacyPolicyScreen(),
+    ),
+    GoRoute(
+      path: '/terms-of-use',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const TermsOfUseScreen(),
+    ),
+    GoRoute(
+      path: '/about-app',
+      parentNavigatorKey: _rootNavigatorKey,
+      builder: (context, state) => const AboutAppScreen(),
     ),
     // Mini Apps
     GoRoute(

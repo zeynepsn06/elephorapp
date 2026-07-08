@@ -17,11 +17,11 @@ class _TeamScreenState extends State<TeamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgPage,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: AppColors.bgPage,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             surfaceTintColor: Colors.transparent,
             pinned: true,
             expandedHeight: 110,
@@ -477,7 +477,7 @@ class _MemberCard extends StatelessWidget {
               onPressed: onManageTap,
               icon: const Icon(Icons.tune_rounded, color: AppColors.textHint),
               style: IconButton.styleFrom(
-                backgroundColor: AppColors.bgPage,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               ),
             )
           else

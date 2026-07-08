@@ -109,3 +109,50 @@ class AppColors {
     end: Alignment.bottomRight,
   );
 }
+
+extension AppColorsExtension on BuildContext {
+  bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
+
+  Color get bgPage => isDarkMode ? AppColors.bgPageDark : AppColors.bgPage;
+  Color get bgCard => isDarkMode ? AppColors.bgCardDark : AppColors.bgCard;
+  Color get bgSurface => isDarkMode ? AppColors.bgSurfaceDark : AppColors.bgSurface;
+  
+  Color get textPrimary => isDarkMode ? AppColors.textPrimaryDark : AppColors.textPrimary;
+  Color get textSecondary => isDarkMode ? AppColors.textSecondaryDark : AppColors.textSecondary;
+  Color get textHint => isDarkMode ? AppColors.textHintDark : AppColors.textHint;
+  Color get textDisabled => isDarkMode ? AppColors.textDisabledDark : AppColors.textDisabled;
+  
+  Color get border => isDarkMode ? AppColors.borderCardDark : AppColors.border;
+  Color get borderInput => isDarkMode ? AppColors.borderInputDark : AppColors.borderInput;
+  Color get borderLight => isDarkMode ? AppColors.borderCardDark : AppColors.borderLight;
+  
+  Color get primaryButton => isDarkMode ? AppColors.buttonPrimaryBgDark : AppColors.primaryButton;
+  Color get buttonText => isDarkMode ? AppColors.buttonPrimaryTextDark : AppColors.buttonText;
+  Color get bgButtonSecondary => isDarkMode ? AppColors.buttonSecondaryBgDark : AppColors.bgButtonSecondary;
+  
+  Color get danger => isDarkMode ? AppColors.errorDark : AppColors.danger;
+  Color get warning => isDarkMode ? AppColors.warningDark : AppColors.warning;
+  Color get success => isDarkMode ? AppColors.successDark : AppColors.success;
+  Color get info => isDarkMode ? AppColors.infoDark : AppColors.info;
+  
+  Color get premiumGold => isDarkMode ? AppColors.premiumGoldDark : AppColors.premiumGold;
+  Color get premiumDark => isDarkMode ? AppColors.premiumCardDark : AppColors.premiumDark;
+
+  Color get black900 => textPrimary;
+  Color get black800 => textSecondary;
+  Color get black700 => isDarkMode ? textSecondary : AppColors.black700;
+  Color get black600 => textHint;
+  
+  Color get gray300 => borderInput;
+  Color get gray100 => bgButtonSecondary;
+  Color get gray50 => bgPage;
+  Color get bgLight => bgPage;
+  Color get bgDark => primaryButton;
+  Color get textOnDark => buttonText;
+
+  // Extra aliases used in cards
+  Color get borderCard => isDarkMode ? AppColors.borderCardDark : AppColors.border;
+  Color get borderCardLight => isDarkMode ? AppColors.borderCardDark : AppColors.borderLight;
+  Color get bgHover => isDarkMode ? AppColors.hoverDark : AppColors.bgButtonSecondary;
+  Color get iconBg => isDarkMode ? AppColors.hoverDark : AppColors.gray100;
+}

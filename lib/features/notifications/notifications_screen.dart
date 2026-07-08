@@ -186,7 +186,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     }
 
     return Scaffold(
-      backgroundColor: AppColors.bgPage,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

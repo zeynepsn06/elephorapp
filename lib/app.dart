@@ -18,7 +18,7 @@ class ElePhorApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: ThemeMode.dark,
+            themeMode: appState.themeMode,
             routerConfig: appRouter,
           );
         },

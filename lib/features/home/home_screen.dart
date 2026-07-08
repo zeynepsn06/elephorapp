@@ -12,11 +12,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bgPage = isDark ? const Color(0xFF0F1115) : AppColors.bgPage;
+    final bgSurface = isDark ? const Color(0xFF171A21) : AppColors.bgPage;
+    final textPrimary = isDark ? Colors.white : AppColors.black900;
+    final textSecondary = isDark ? const Color(0xFFA8B0BD) : AppColors.textSecondary;
+    final bgCard = isDark ? const Color(0xFF1E222B) : AppColors.bgCard;
+    final borderColor = isDark ? const Color(0xFF2D3440) : AppColors.border;
+    final iconBg = isDark ? const Color(0xFF262B36) : AppColors.gray100;
+    final fabAvatarBg = isDark ? Colors.white : AppColors.black900;
+    final fabAvatarText = isDark ? Colors.black : Colors.white;
 
     return Scaffold(
-      backgroundColor: AppColors.bgPage,
+      backgroundColor: bgPage,
       appBar: AppBar(
-        backgroundColor: AppColors.bgPage,
+        backgroundColor: bgSurface,
         elevation: 0,
         scrolledUnderElevation: 0,
         titleSpacing: 20,
@@ -27,15 +37,15 @@ class HomeScreen extends StatelessWidget {
               'assets/elephor-mark.png',
               width: 28,
               height: 28,
-              color: AppColors.black900,
+              color: textPrimary,
             ),
             const SizedBox(width: 8),
-            const Text(
+            Text(
               'Elephor+',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w900,
-                color: AppColors.black900,
+                color: textPrimary,
                 letterSpacing: -0.5,
               ),
             ),
@@ -47,27 +57,27 @@ class HomeScreen extends StatelessWidget {
               appState.themeMode == ThemeMode.dark
                   ? Icons.light_mode_rounded
                   : Icons.dark_mode_rounded,
-              color: AppColors.black900,
+              color: textPrimary,
             ),
             onPressed: () => appState.toggleThemeMode(),
           ),
           IconButton(
-            icon: const Icon(Icons.notifications_none_rounded, color: AppColors.black900),
+            icon: Icon(Icons.notifications_none_rounded, color: textPrimary),
             onPressed: () => context.push('/notifications'),
           ),
           Container(
             margin: const EdgeInsets.only(right: 16, left: 4),
             width: 34,
             height: 34,
-            decoration: const BoxDecoration(
-              color: AppColors.black900,
+            decoration: BoxDecoration(
+              color: fabAvatarBg,
               shape: BoxShape.circle,
             ),
-            child: const Center(
+            child: Center(
               child: Text(
                 'EA',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: fabAvatarText,
                   fontWeight: FontWeight.w700,
                   fontSize: 12,
                 ),
@@ -93,19 +103,19 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Text(
                           'Merhaba Eren',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.textSecondary,
+                            color: textSecondary,
                           ),
                         ),
                         const SizedBox(height: 4),
-                        const Text(
+                        Text(
                           'Bugün işletmende\nneler oluyor?',
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.w900,
-                            color: AppColors.black900,
+                            color: textPrimary,
                             height: 1.15,
                             letterSpacing: -0.5,
                           ),
@@ -119,25 +129,25 @@ class HomeScreen extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 4),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: AppColors.bgCard,
+                      color: bgCard,
                       borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: AppColors.border),
+                      border: Border.all(color: borderColor),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.black900),
-                        SizedBox(width: 6),
+                      children: [
+                        Icon(Icons.calendar_today_outlined, size: 14, color: textPrimary),
+                        const SizedBox(width: 6),
                         Text(
                           'Bugün',
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.black900,
+                            color: textPrimary,
                           ),
                         ),
-                        SizedBox(width: 4),
-                        Icon(Icons.keyboard_arrow_down_rounded, size: 16, color: AppColors.black900),
+                        const SizedBox(width: 4),
+                        Icon(Icons.keyboard_arrow_down_rounded, size: 16, color: textPrimary),
                       ],
                     ),
                   ),
@@ -160,7 +170,7 @@ class HomeScreen extends StatelessWidget {
                     value: '4',
                     title: 'Aktif Vardiya',
                     subtitle: '4 kişi çalışıyor',
-                    onTap: () {},
+                    onTap: () => context.push('/mini-apps/vardiya'),
                   ),
                   const SizedBox(width: 12),
                   _SummaryCardNew(
@@ -168,7 +178,7 @@ class HomeScreen extends StatelessWidget {
                     value: '2',
                     title: 'Geciken Ödeme',
                     subtitle: 'Toplam 8.750 TL',
-                    onTap: () {},
+                    onTap: () => context.push('/mini-apps/alacak-borc'),
                   ),
                   const SizedBox(width: 12),
                   _SummaryCardNew(
@@ -176,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                     value: '7',
                     title: 'Rezervasyon',
                     subtitle: 'Bugünkü rezervasyon',
-                    onTap: () {},
+                    onTap: () => context.push('/mini-apps/rezervasyon'),
                   ),
                 ],
               ),
@@ -190,28 +200,28 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Uygulamalarım',
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w800,
-                      color: AppColors.black900,
+                      color: textPrimary,
                     ),
                   ),
                   GestureDetector(
                     onTap: () => context.go('/apps'),
                     child: Row(
-                      children: const [
+                      children: [
                         Text(
                           'Tümünü Gör',
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textSecondary,
+                            color: textSecondary,
                           ),
                         ),
-                        SizedBox(width: 2),
-                        Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.textSecondary),
+                        const SizedBox(width: 2),
+                        Icon(Icons.chevron_right_rounded, size: 18, color: textSecondary),
                       ],
                     ),
                   ),
@@ -346,8 +356,8 @@ class HomeScreen extends StatelessWidget {
                     name: 'Raporlama',
                     description: 'İşletmenize dair detaylı raporlar ve analizler alın.',
                     status: MiniAppStatus.notAdded,
-                    onTap: () {},
-                    onAction: () {},
+                    onTap: () => context.go('/apps'),
+                    onAction: () => context.go('/apps'),
                   ),
                   const SizedBox(height: 1),
                   _SuggestedAppTile(
@@ -355,8 +365,8 @@ class HomeScreen extends StatelessWidget {
                     name: 'Müşteri Yönetimi',
                     description: 'Müşteri bilgilerini düzenli tutun ve erişiminizi artırın.',
                     status: MiniAppStatus.premium,
-                    onTap: () {},
-                    onAction: () {},
+                    onTap: () => context.go('/apps'),
+                    onAction: () => context.go('/apps'),
                   ),
                   const SizedBox(height: 1),
                   _SuggestedAppTile(
@@ -364,8 +374,8 @@ class HomeScreen extends StatelessWidget {
                     name: 'Stok Yönetimi',
                     description: 'Stok giriş-çıkışlarını takip edin ve envanterinizi kontrol altında tutun.',
                     status: MiniAppStatus.notAdded,
-                    onTap: () {},
-                    onAction: () {},
+                    onTap: () => context.go('/apps'),
+                    onAction: () => context.go('/apps'),
                   ),
                 ],
               ),
@@ -519,17 +529,29 @@ class _MyAppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E222B) : AppColors.bgCard;
+    final cardBorder = isDark ? const Color(0xFF2D3440) : AppColors.border;
+    final iconBg = isDark ? Colors.white : AppColors.black900;
+    final iconColor = isDark ? Colors.black : Colors.white;
+    final textPrimary = isDark ? Colors.white : AppColors.black900;
+    final textSecondary = isDark ? const Color(0xFFA8B0BD) : AppColors.textSecondary;
+    final textHint = isDark ? const Color(0xFF6B7280) : AppColors.textHint;
+    final actionBg = isDark ? Colors.white : AppColors.black900;
+    final actionText = isDark ? Colors.black : Colors.white;
+    final detailBg = isDark ? const Color(0xFF262B36) : AppColors.bgCard;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 200,
         decoration: BoxDecoration(
-          color: AppColors.bgCard,
+          color: cardBg,
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: AppColors.border),
+          border: Border.all(color: cardBorder),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -547,22 +569,22 @@ class _MyAppCard extends StatelessWidget {
                   width: 44,
                   height: 44,
                   decoration: BoxDecoration(
-                    color: AppColors.black900,
+                    color: iconBg,
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: Icon(app.icon, color: Colors.white, size: 22),
+                  child: Icon(app.icon, color: iconColor, size: 22),
                 ),
-                const Icon(Icons.more_horiz_rounded, color: AppColors.textHint, size: 20),
+                Icon(Icons.more_horiz_rounded, color: textHint, size: 20),
               ],
             ),
             const SizedBox(height: 12),
             // App name
             Text(
               app.name,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w800,
-                color: AppColors.black900,
+                color: textPrimary,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -572,9 +594,9 @@ class _MyAppCard extends StatelessWidget {
             Expanded(
               child: Text(
                 app.shortDescription,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 10,
-                  color: AppColors.textSecondary,
+                  color: textSecondary,
                   height: 1.4,
                 ),
                 maxLines: 2,
@@ -585,14 +607,14 @@ class _MyAppCard extends StatelessWidget {
             // Bottom: Günlük Özet
             Row(
               children: [
-                Icon(Icons.analytics_outlined, size: 12, color: AppColors.textSecondary),
+                Icon(Icons.analytics_outlined, size: 12, color: textSecondary),
                 const SizedBox(width: 4),
                 Expanded(
                   child: Text(
                     app.dailySummary ?? stat,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 10,
-                      color: AppColors.textSecondary,
+                      color: textSecondary,
                       fontWeight: FontWeight.w600,
                     ),
                     maxLines: 1,
@@ -618,16 +640,16 @@ class _MyAppCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       decoration: BoxDecoration(
-                        color: AppColors.black900,
+                        color: actionBg,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                         child: Text(
                           app.quickActionText ?? 'İşlem',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
-                            color: Colors.white,
+                            color: actionText,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -644,17 +666,17 @@ class _MyAppCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       decoration: BoxDecoration(
-                        color: AppColors.bgCard,
-                        border: Border.all(color: AppColors.border),
+                        color: detailBg,
+                        border: Border.all(color: cardBorder),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           'Detaylar',
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.black900,
+                            color: textPrimary,
                           ),
                         ),
                       ),
@@ -690,24 +712,32 @@ class _SuggestedAppTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final textPrimary = isDark ? Colors.white : AppColors.black900;
+    final textSecondary = isDark ? const Color(0xFFA8B0BD) : AppColors.textSecondary;
+    final textHint = isDark ? const Color(0xFF6B7280) : AppColors.textHint;
+    final iconBg = isDark ? const Color(0xFF262B36) : AppColors.gray100;
+    final borderColor = isDark ? const Color(0xFF2D3440) : AppColors.borderLight;
+    final cardBg = isDark ? const Color(0xFF1E222B) : AppColors.bgCard;
+    final cardBorder = isDark ? const Color(0xFF2D3440) : AppColors.border;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14),
-        decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: AppColors.borderLight)),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: borderColor)),
         ),
         child: Row(
           children: [
-            // Gray icon background
             Container(
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: AppColors.gray100,
+                color: iconBg,
                 borderRadius: BorderRadius.circular(14),
               ),
-              child: Icon(icon, color: AppColors.black900, size: 24),
+              child: Icon(icon, color: textPrimary, size: 24),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -716,18 +746,18 @@ class _SuggestedAppTile extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.black900,
+                      color: textPrimary,
                     ),
                   ),
                   const SizedBox(height: 3),
                   Text(
                     description,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: AppColors.textSecondary,
+                      color: textSecondary,
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -736,16 +766,16 @@ class _SuggestedAppTile extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            _buildActionButton(),
+            _buildActionButton(context, cardBg, cardBorder, textPrimary, textHint),
             const SizedBox(width: 4),
-            const Icon(Icons.chevron_right_rounded, color: AppColors.textHint, size: 18),
+            Icon(Icons.chevron_right_rounded, color: textHint, size: 18),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildActionButton() {
+  Widget _buildActionButton(BuildContext context, Color cardBg, Color cardBorder, Color textPrimary, Color textHint) {
     switch (status) {
       case MiniAppStatus.premium:
         return GestureDetector(
@@ -756,9 +786,9 @@ class _SuggestedAppTile extends StatelessWidget {
               gradient: AppColors.premiumGradient,
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Row(
+            child: const Row(
               mainAxisSize: MainAxisSize.min,
-              children: const [
+              children: [
                 Icon(Icons.workspace_premium_rounded, size: 12, color: Colors.white),
                 SizedBox(width: 4),
                 Text('Pro', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
@@ -770,15 +800,15 @@ class _SuggestedAppTile extends StatelessWidget {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
           decoration: BoxDecoration(
-            color: AppColors.gray100,
+            color: cardBg,
             borderRadius: BorderRadius.circular(14),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              Icon(Icons.access_time_rounded, size: 12, color: AppColors.textHint),
-              SizedBox(width: 4),
-              Text('Yakında', style: TextStyle(fontSize: 11, color: AppColors.textHint, fontWeight: FontWeight.w600)),
+            children: [
+              Icon(Icons.access_time_rounded, size: 12, color: textHint),
+              const SizedBox(width: 4),
+              Text('Yakında', style: TextStyle(fontSize: 11, color: textHint, fontWeight: FontWeight.w600)),
             ],
           ),
         );
@@ -788,13 +818,13 @@ class _SuggestedAppTile extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
             decoration: BoxDecoration(
-              color: AppColors.bgCard,
-              border: Border.all(color: AppColors.border),
+              color: cardBg,
+              border: Border.all(color: cardBorder),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: const Text(
+            child: Text(
               'Ekle',
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: AppColors.black900),
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: textPrimary),
             ),
           ),
         );
@@ -821,17 +851,26 @@ class _SummaryCardNew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? const Color(0xFF1E222B) : Colors.white;
+    final cardBorder = isDark ? const Color(0xFF2D3440) : Colors.transparent;
+    final iconBg = isDark ? Colors.white : AppColors.black900;
+    final iconColor = isDark ? Colors.black : Colors.white;
+    final textPrimary = isDark ? Colors.white : AppColors.black900;
+    final textSecondary = isDark ? const Color(0xFFA8B0BD) : AppColors.textSecondary;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         width: 140,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: cardBg,
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: cardBorder, width: isDark ? 1 : 0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -840,53 +879,50 @@ class _SummaryCardNew extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Siyah yuvarlak ikon
             Container(
               width: 36,
               height: 36,
-              decoration: const BoxDecoration(
-                color: AppColors.black900,
+              decoration: BoxDecoration(
+                color: iconBg,
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon, color: Colors.white, size: 18),
+              child: Icon(icon, color: iconColor, size: 18),
             ),
             const Spacer(),
-            // Büyük numara
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w900,
-                color: AppColors.black900,
+                color: textPrimary,
                 height: 1,
               ),
             ),
             const SizedBox(height: 6),
-            // Başlık ve ok
             Row(
               children: [
                 Expanded(
                   child: Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.black900,
+                      color: textPrimary,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const Icon(Icons.chevron_right_rounded, size: 14, color: AppColors.black900),
+                Icon(Icons.chevron_right_rounded, size: 14, color: textPrimary),
               ],
             ),
             const SizedBox(height: 4),
-            // Alt başlık
             Text(
               subtitle,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 10,
-                color: AppColors.textSecondary,
+                color: textSecondary,
+                fontWeight: FontWeight.w500,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -897,4 +933,7 @@ class _SummaryCardNew extends StatelessWidget {
     );
   }
 }
+
+
+
 

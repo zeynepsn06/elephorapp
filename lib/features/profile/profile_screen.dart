@@ -8,7 +8,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgPage,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -116,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     // Profili Düzenle
                     GestureDetector(
-                      onTap: () => context.push('/placeholder/Profili%20Düzenle'),
+                      onTap: () => context.push('/account-info'),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: const [
@@ -222,7 +222,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () => context.push('/placeholder/İşletmem'),
+                        onTap: () => context.push('/business-settings'),
                         child: const Row(
                           children: [
                             Text(
@@ -286,7 +286,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => context.push('/placeholder/İşletme%20Ayarları'),
+                          onTap: () => context.push('/business-settings'),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                             decoration: BoxDecoration(
@@ -320,77 +320,77 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             // ── Hesap Yönetimi ───────────────────────────────────────
-            _buildSectionHeader('Hesap Yönetimi'),
+            _buildSectionHeader(context, 'Hesap Yönetimi'),
             const SizedBox(height: 8),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.person_outline_rounded,
               title: 'Hesap Bilgileri',
               subtitle: 'Kişisel bilgileriniz ve iletişim ayarları.',
-              onTap: () => context.push('/placeholder/Hesap%20Bilgileri'),
+              onTap: () => context.push('/account-info'),
             ),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.people_outline_rounded,
               title: 'Ekip & Yetkiler',
               subtitle: 'Ekip üyelerinizi ve yetki düzeylerini yönetin.',
               onTap: () => context.push('/team'),
             ),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.workspace_premium_outlined,
               title: 'Abonelik & Faturalama',
               subtitle: 'Planınızı ve faturalandırma bilgilerinizi yönetin.',
               onTap: () => context.push('/subscription'),
             ),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.credit_card_outlined,
               title: 'Ödeme Yöntemleri',
               subtitle: 'Kayıtlı kartlarınız ve ödeme yöntemleriniz.',
               onTap: () => context.push('/payment-methods'),
             ),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.notifications_none_rounded,
               title: 'Bildirim Ayarları',
               subtitle: 'Bildirim tercihlerinizi özelleştirin.',
-              onTap: () => context.push('/placeholder/Bildirim%20Ayarları'),
+              onTap: () => context.push('/notification-settings'),
             ),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.lock_outline_rounded,
               title: 'Güvenlik',
               subtitle: 'Şifre, giriş ve güvenlik ayarlarınızı yönetin.',
-              onTap: () => context.push('/placeholder/Güvenlik'),
+              onTap: () => context.push('/security-settings'),
             ),
 
             const SizedBox(height: 24),
 
             // ── Destek & Diğer ───────────────────────────────────────
-            _buildSectionHeader('Destek & Diğer'),
+            _buildSectionHeader(context, 'Destek & Diğer'),
             const SizedBox(height: 8),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.help_outline_rounded,
               title: 'Yardım Merkezi',
               subtitle: 'Sık sorulan sorular ve rehberlere göz atın.',
-              onTap: () => context.push('/placeholder/Yardım%20Merkezi'),
+              onTap: () => context.push('/help-center'),
             ),
-            _buildListTile(
+            _buildListTile(context, 
               icon: Icons.chat_bubble_outline_rounded,
               title: 'Bize Ulaşın',
               subtitle: 'Destek ekibimizle iletişime geçin.',
-              onTap: () => context.push('/placeholder/Bize%20Ulaşın'),
+              onTap: () => context.push('/contact-us'),
             ),
-            _buildSimpleTile(
+            _buildSimpleTile(context, 
               icon: Icons.shield_outlined,
               title: 'Gizlilik Politikası',
-              onTap: () => context.push('/placeholder/Gizlilik%20Politikası'),
+              onTap: () => context.push('/privacy-policy'),
             ),
-            _buildSimpleTile(
+            _buildSimpleTile(context, 
               icon: Icons.description_outlined,
               title: 'Kullanım Koşulları',
-              onTap: () => context.push('/placeholder/Kullanım%20Koşulları'),
+              onTap: () => context.push('/terms-of-use'),
             ),
-            _buildSimpleTileWithValue(
+            _buildSimpleTileWithValue(context, 
               icon: Icons.info_outline_rounded,
               title: 'Uygulama Hakkında',
               value: 'Elephor+ sürüm 1.0.0',
-              onTap: () => context.push('/placeholder/Uygulama%20Hakkında'),
+              onTap: () => context.push('/about-app'),
             ),
 
             const SizedBox(height: 20),
@@ -408,20 +408,20 @@ class ProfileScreen extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   decoration: BoxDecoration(
-                    color: AppColors.danger.withOpacity(0.1),
+                    color: context.danger.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.logout_rounded, color: AppColors.danger, size: 18),
-                      SizedBox(width: 8),
+                    children: [
+                      Icon(Icons.logout_rounded, color: context.danger, size: 18),
+                      const SizedBox(width: 8),
                       Text(
                         'Çıkış Yap',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.danger,
+                          color: context.danger,
                         ),
                       ),
                     ],
@@ -438,22 +438,22 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // ── Section header builder ─────────────────────────────────────────────
-  static Widget _buildSectionHeader(String title) {
+  static Widget _buildSectionHeader(BuildContext context, String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w700,
-          color: AppColors.textPrimary,
+          color: context.textPrimary,
         ),
       ),
     );
   }
 
   // ── List tile with subtitle ────────────────────────────────────────────
-  static Widget _buildListTile({
+  static Widget _buildListTile(BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -463,9 +463,9 @@ class ProfileScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 14, 20, 14),
-        decoration: const BoxDecoration(
-          color: AppColors.bgCard,
-          border: Border(bottom: BorderSide(color: AppColors.borderLight)),
+        decoration: BoxDecoration(
+          color: context.bgCard,
+          border: Border(bottom: BorderSide(color: context.borderLight)),
         ),
         child: Row(
           children: [
@@ -473,10 +473,10 @@ class ProfileScreen extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.bgButtonSecondary,
+                color: context.iconBg,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: AppColors.textPrimary, size: 20),
+              child: Icon(icon, color: context.textPrimary, size: 20),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -485,24 +485,24 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: AppColors.textPrimary,
+                      color: context.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 11,
-                      color: AppColors.textHint,
+                      color: context.textHint,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.textHint),
+            Icon(Icons.chevron_right_rounded, size: 18, color: context.textHint),
           ],
         ),
       ),
@@ -510,7 +510,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // ── Simple tile (no subtitle) ──────────────────────────────────────────
-  static Widget _buildSimpleTile({
+  static Widget _buildSimpleTile(BuildContext context, {
     required IconData icon,
     required String title,
     required VoidCallback onTap,
@@ -519,9 +519,9 @@ class ProfileScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 14, 20, 14),
-        decoration: const BoxDecoration(
-          color: AppColors.bgCard,
-          border: Border(bottom: BorderSide(color: AppColors.borderLight)),
+        decoration: BoxDecoration(
+          color: context.bgCard,
+          border: Border(bottom: BorderSide(color: context.borderLight)),
         ),
         child: Row(
           children: [
@@ -529,23 +529,23 @@ class ProfileScreen extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.bgButtonSecondary,
+                color: context.iconBg,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: AppColors.textPrimary, size: 20),
+              child: Icon(icon, color: context.textPrimary, size: 20),
             ),
             const SizedBox(width: 14),
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
+                  color: context.textPrimary,
                 ),
               ),
             ),
-            const Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.textHint),
+            Icon(Icons.chevron_right_rounded, size: 18, color: context.textHint),
           ],
         ),
       ),
@@ -553,7 +553,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // ── Simple tile with right value ───────────────────────────────────────
-  static Widget _buildSimpleTileWithValue({
+  static Widget _buildSimpleTileWithValue(BuildContext context, {
     required IconData icon,
     required String title,
     required String value,
@@ -563,9 +563,9 @@ class ProfileScreen extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 14, 20, 14),
-        decoration: const BoxDecoration(
-          color: AppColors.bgCard,
-          border: Border(bottom: BorderSide(color: AppColors.borderLight)),
+        decoration: BoxDecoration(
+          color: context.bgCard,
+          border: Border(bottom: BorderSide(color: context.borderLight)),
         ),
         child: Row(
           children: [
@@ -573,31 +573,31 @@ class ProfileScreen extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColors.bgButtonSecondary,
+                color: context.iconBg,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: AppColors.textPrimary, size: 20),
+              child: Icon(icon, color: context.textPrimary, size: 20),
             ),
             const SizedBox(width: 14),
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700,
-                  color: AppColors.textPrimary,
+                  color: context.textPrimary,
                 ),
               ),
             ),
             Text(
               value,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 11,
-                color: AppColors.textHint,
+                color: context.textHint,
               ),
             ),
             const SizedBox(width: 4),
-            const Icon(Icons.chevron_right_rounded, size: 18, color: AppColors.textHint),
+            Icon(Icons.chevron_right_rounded, size: 18, color: context.textHint),
           ],
         ),
       ),
